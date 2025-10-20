@@ -94,24 +94,14 @@ class TestCreateCourier:
         assert response.status_code == 409
         
     @allure.title('Создание курьера - получение корректного тела ответа при создании курьера с существующим логином')
-    def test_create_courier_same_login_return_correct_body(self):
+    def test_create_courier_same_login_return_correct_body(self, create_courier):
         help = Help()
-        login = help.generate_login()
-        password = help.generate_password()
-        first_name = help.generate_firstname()
-        payload = {
-            "login": login,
-            "password": password,
-            "firstName": first_name
-        }
-        requests.post(CREATE_COURIER, json=payload)
+        login_pass = create_courier
         new_password = help.generate_password()
         new_first_name = help.generate_firstname()
-        payload_same_login = {
-            "login": login,
-            "password": new_password,
-            "firstName": new_first_name
-        }
-        response = requests.post(CREATE_COURIER, json=payload_same_login)
+        payload = {'login': login_pass[0],
+                   'password': new_password,
+                   'firstName': new_first_name}
+        response = requests.post(CREATE_COURIER, json=payload)
         
         assert response.json()['message'] == 'Этот логин уже используется. Попробуйте другой.'
