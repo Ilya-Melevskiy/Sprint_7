@@ -4,22 +4,24 @@ import string
 
 from urls.urls import CREATE_COURIER
 class Help:
+
+    def generate_random_string(self, length):
+        letters = string.ascii_lowercase
+        random_string = ''.join(random.choice(letters) for i in range(length))
+        return random_string
+    
     # метод регистрации нового курьера возвращает список из логина и пароля
     # если регистрация не удалась, возвращает пустой список
     def register_new_courier_and_return_login_password(self):
         # метод генерирует строку, состоящую только из букв нижнего регистра, в качестве параметра передаём длину строки
-        def generate_random_string(length):
-            letters = string.ascii_lowercase
-            random_string = ''.join(random.choice(letters) for i in range(length))
-            return random_string
 
         # создаём список, чтобы метод мог его вернуть
         login_pass = []
 
         # генерируем логин, пароль и имя курьера
-        login = generate_random_string(10)
-        password = generate_random_string(10)
-        first_name = generate_random_string(10)
+        login = self.generate_random_string(10)
+        password = self.generate_random_string(10)
+        first_name = self.generate_random_string(10)
 
         # собираем тело запроса
         payload = {
@@ -41,55 +43,35 @@ class Help:
         return login_pass
     
     def generate_login_password_firstname(self):
-            # метод генерирует строку, состоящую только из букв нижнего регистра, в качестве параметра передаём длину строки
-            def generate_random_string(length):
-                letters = string.ascii_lowercase
-                random_string = ''.join(random.choice(letters) for i in range(length))
-                return random_string
             
-            # генерируем логин, пароль и имя курьера
-            login = generate_random_string(10)
-            password = generate_random_string(10)
-            first_name = generate_random_string(10)
+        # генерируем логин, пароль и имя курьера
+        login = self.generate_random_string(10)
+        password = self.generate_random_string(10)
+        first_name = self.generate_random_string(10)
 
-            # собираем тело запроса
-            payload = {
-                "login": login,
-                "password": password,
-                "firstName": first_name
-            }
+        # собираем тело запроса
+        payload = {
+            "login": login,
+            "password": password,
+            "firstName": first_name
+        }
 
-            return payload
-    
+        return payload
+
     def generate_login(self):
+            
+        login = self.generate_random_string(10)
 
-            def generate_random_string(length):
-                letters = string.ascii_lowercase
-                random_string = ''.join(random.choice(letters) for i in range(length))
-                return random_string
+        return login
 
-            login = generate_random_string(10)
-
-            return login
-    
     def generate_password(self):
 
-            def generate_random_string(length):
-                letters = string.ascii_lowercase
-                random_string = ''.join(random.choice(letters) for i in range(length))
-                return random_string
-
-            password = generate_random_string(10)
-            
-            return password
+        password = self.generate_random_string(10)
+        
+        return password
     
     def generate_firstname(self):
 
-            def generate_random_string(length):
-                letters = string.ascii_lowercase
-                random_string = ''.join(random.choice(letters) for i in range(length))
-                return random_string
-
-            first_name = generate_random_string(10)
-            
-            return first_name
+        first_name = self.generate_random_string(10)
+        
+        return first_name
