@@ -2,6 +2,7 @@ import requests
 import random
 import string
 
+from urls.urls import CREATE_COURIER
 class Help:
     # метод регистрации нового курьера возвращает список из логина и пароля
     # если регистрация не удалась, возвращает пустой список
@@ -28,7 +29,7 @@ class Help:
         }
 
         # отправляем запрос на регистрацию курьера и сохраняем ответ в переменную response
-        response = requests.post('https://qa-scooter.praktikum-services.ru/api/v1/courier', data=payload)
+        response = requests.post(CREATE_COURIER, data=payload)
 
         # если регистрация прошла успешно (код ответа 201), добавляем в список логин и пароль курьера
         if response.status_code == 201:

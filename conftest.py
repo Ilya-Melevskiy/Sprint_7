@@ -2,6 +2,7 @@ import pytest
 import requests
 
 from helpers.helpers import Help
+from urls.urls import LOGIN_COURIER, DELETE_COURIER
 
 @pytest.fixture
 def create_courier():
@@ -12,8 +13,8 @@ def create_courier():
 
     payload = {'login': login_pass[0],
                 'password': login_pass[1]}
-    response_post = requests.post('https://qa-scooter.praktikum-services.ru/api/v1/courier/login', json=payload)
+    response_post = requests.post(LOGIN_COURIER, json=payload)
     id = response_post.json()['id']
-    requests.delete(f"https://qa-scooter.praktikum-services.ru/api/v1/courier/{id}")
+    requests.delete(DELETE_COURIER.format(id=id))
 
 

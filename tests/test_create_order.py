@@ -2,6 +2,8 @@ import requests
 import allure
 import pytest
 
+from urls.urls import CREATE_ORDER 
+
 class TestCreateOrder:
 
     @pytest.mark.parametrize('color', ['"BLACK"', '"GREY"', '"BLACK", "GREY"', ''])
@@ -19,7 +21,7 @@ class TestCreateOrder:
             "color": [color],
         }
         response = requests.post(
-            "https://qa-scooter.praktikum-services.ru/api/v1/orders", json=payload
+            CREATE_ORDER, json=payload
         )
 
         assert response.status_code == 201
@@ -38,7 +40,7 @@ class TestCreateOrder:
             "color": ["BLACK"],
         }
         response = requests.post(
-            "https://qa-scooter.praktikum-services.ru/api/v1/orders", json=payload
+            CREATE_ORDER, json=payload
         )
 
         assert "track" in response.json() and type(response.json()["track"]) is int
